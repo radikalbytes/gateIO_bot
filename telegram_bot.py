@@ -28,7 +28,6 @@ secretkey = 'YOUR gate.io API secret key'
 API_URL = 'data.gate.io'
 
 gate = GateIO(API_URL,apikey,secretkey)
-mimovil_id = 5604615
 
 commands = {  # command description used in the "help" command
               '/start': 'Empezar a usar el bot',
@@ -90,6 +89,8 @@ def envia_cotizaciones (cid):
     try:
         for usuario in knownUsers['usuarios']:
             if usuario['user_id'] == cid:
+                if len(usuario['coin']) == 0:
+                    break
                 enviaPrecio = "Mercado:\n"
                 for monedas in usuario['coin']:
                     precio = (gate.ticker(monedas))
